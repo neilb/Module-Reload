@@ -1,7 +1,7 @@
 use strict;
 package Module::Reload;
 use vars qw($VERSION $Debug %Stat);
-$VERSION = "1.06";
+$VERSION = "1.07";
 
 sub check {
     my $c=0;
@@ -11,6 +11,8 @@ sub check {
 	my $mtime = (stat $file)[9];
 	$Stat{$file} = $^T
 	    unless defined $Stat{$file};
+	warn "Module::Reload: stat '$file' got $mtime >? $Stat{$file}\n"
+	    if $Debug >= 3;
 	if ($mtime > $Stat{$file}) {
 	    delete $INC{$key};
 	    eval { 
@@ -25,7 +27,7 @@ sub check {
 		    if $Debug == 1;
 		warn("Module::Reload: process $$ reloaded '$key' (\@INC=".
 		     join(', ',@INC).")\n")
-		    if $Debug > 1;
+		    if $Debug >= 2;
 	    }
 	    ++$c;
 	}
@@ -58,15 +60,14 @@ Set $Module::Reload::Debug to enable debugging output.
 
 =head1 BUGS
 
-A growing number of pragmas (C<base>, C<fields>, etc.) make the
-assumption that they are only loaded once.  When you reload the same
-file, they tend to show their surprised by not working.  If you feel
-motivated to submit patches for these problems, I would encourage
-that.
+A growing number of pragmas (C<base>, C<fields>, etc.) assume that
+they are loaded once only.  When you reload the same file again, they
+tend to become confused and break.  If you feel motivated to submit
+patches for these problems, I would encourage that.
 
 =head1 SEE ALSO
 
-mod_perl, Event, ObjStore
+Event
 
 =head1 AUTHOR
 

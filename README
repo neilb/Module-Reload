@@ -1,10 +1,10 @@
 =head1 NAME
 
-AutoReloader - Reload %INC files when updated on disk
+Module::Reload - Reload %INC files when updated on disk
 
 =head1 SYNOPSIS
 
-  AutoReloader->check;
+  Module::Reload->check;
 
 =head1 DESCRIPTION
 
@@ -14,10 +14,24 @@ file, it sees the file in C<%INC> and does not reload from disk.  This
 module's handler iterates over C<%INC> and reloads the file if it has
 changed on disk. 
 
-Set $AutoReloader::Debug to enable debugging output.
+Set $Module::Reload::Debug to enable debugging output.
 
-=head1 DIRECTION
+=head1 BUGS
 
-It is expected that this will be included in the main perl
-distribution shortly.
+A growing number of pragmas (C<base>, C<fields>, etc.) assume that
+they are loaded once only.  When you reload the same file again, they
+tend to become confused and break.  If you feel motivated to submit
+patches for these problems, I would encourage that.
 
+=head1 SEE ALSO
+
+Event
+
+=head1 AUTHOR
+
+Copyright © 1997-1998 Doug MacEachern & Joshua Pritikin.  All rights reserved.
+
+This package is free software and is provided "as is" without express
+or implied warranty.  It may be used, redistributed and/or modified
+under the terms of the Perl Artistic License (see
+http://www.perl.com/perl/misc/Artistic.html)

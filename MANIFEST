@@ -1,4 +1,6 @@
-Reload.pm
 MANIFEST
-README
+MANIFEST.SKIP
 Makefile.PL
+README
+Reload.pm
+t/reload.t
