@@ -1,7 +1,7 @@
 use strict;
 package Module::Reload;
 use vars qw($VERSION $Debug %Stat);
-$VERSION = "1.05";
+$VERSION = "1.06";
 
 sub check {
     my $c=0;
@@ -13,11 +13,17 @@ sub check {
 	    unless defined $Stat{$file};
 	if ($mtime > $Stat{$file}) {
 	    delete $INC{$key};
-	    require $key;
-	    if ($Debug) {
-		warn "Module::Reload: process $$ reloading $key\n"
+	    eval { 
+		local $SIG{__WARN__} = \&warn;
+		require $key;
+	    };
+	    if ($@) {
+		warn "Module::Reload: error during reload of '$key': $@\n"
+	    }
+	    elsif ($Debug) {
+		warn "Module::Reload: process $$ reloaded '$key'\n"
 		    if $Debug == 1;
-		warn("Module::Reload: process $$ reloading $key (\@INC=".
+		warn("Module::Reload: process $$ reloaded '$key' (\@INC=".
 		     join(', ',@INC).")\n")
 		    if $Debug > 1;
 	    }
@@ -49,6 +55,14 @@ module's handler iterates over C<%INC> and reloads the file if it has
 changed on disk. 
 
 Set $Module::Reload::Debug to enable debugging output.
+
+=head1 BUGS
+
+A growing number of pragmas (C<base>, C<fields>, etc.) make the
+assumption that they are only loaded once.  When you reload the same
+file, they tend to show their surprised by not working.  If you feel
+motivated to submit patches for these problems, I would encourage
+that.
 
 =head1 SEE ALSO
 
