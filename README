@@ -1,0 +1,23 @@
+=head1 NAME
+
+AutoReloader - Reload %INC files when updated on disk
+
+=head1 SYNOPSIS
+
+  AutoReloader->check;
+
+=head1 DESCRIPTION
+
+When Perl pulls a file via C<require>, it stores the filename in the
+global hash C<%INC>.  The next time Perl tries to C<require> the same
+file, it sees the file in C<%INC> and does not reload from disk.  This
+module's handler iterates over C<%INC> and reloads the file if it has
+changed on disk. 
+
+Set $AutoReloader::Debug to enable debugging output.
+
+=head1 DIRECTION
+
+It is expected that this will be included in the main perl
+distribution shortly.
+
