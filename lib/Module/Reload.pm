@@ -10,32 +10,36 @@ our %Stat;
 sub check {
     my $c=0;
     while (my($key,$file) = each %INC) {
-	next if $file eq $INC{"Module/Reload.pm"};  #too confusing
-	local $^W = 0;
-	my $mtime = (stat $file)[9];
-	$Stat{$file} = $^T
-	    unless defined $Stat{$file};
-	warn "Module::Reload: stat '$file' got $mtime >? $Stat{$file}\n"
-	    if $Debug >= 3;
-	if ($mtime > $Stat{$file}) {
-	    delete $INC{$key};
-	    eval { 
-		local $SIG{__WARN__} = \&warn;
-		require $key;
-	    };
-	    if ($@) {
-		warn "Module::Reload: error during reload of '$key': $@\n"
-	    }
-	    elsif ($Debug) {
-		warn "Module::Reload: process $$ reloaded '$key'\n"
-		    if $Debug == 1;
-		warn("Module::Reload: process $$ reloaded '$key' (\@INC=".
-		     join(', ',@INC).")\n")
-		    if $Debug >= 2;
-	    }
-	    ++$c;
-	}
-	$Stat{$file} = $mtime;
+        next if $file eq $INC{"Module/Reload.pm"};  #too confusing
+        local $^W = 0;
+        my $mtime = (stat $file)[9];
+        $Stat{$file} = $^T unless defined $Stat{$file};
+
+        if ($Debug >= 3) {
+            warn "Module::Reload: stat '$file' got $mtime >? $Stat{$file}\n";
+        }
+
+        if ($mtime > $Stat{$file}) {
+            delete $INC{$key};
+            eval { 
+                local $SIG{__WARN__} = \&warn;
+                require $key;
+            };
+            if ($@) {
+                warn "Module::Reload: error during reload of '$key': $@\n";
+            }
+            elsif ($Debug) {
+                if ($Debug == 1) {
+                    warn "Module::Reload: process $$ reloaded '$key'\n";
+                }
+                if ($Debug >= 2) {
+                    warn("Module::Reload: process $$ reloaded '$key' (\@INC=".
+                         join(', ',@INC).")\n");
+                }
+            }
+            ++$c;
+        }
+        $Stat{$file} = $mtime;
     }
     $c;
 }
