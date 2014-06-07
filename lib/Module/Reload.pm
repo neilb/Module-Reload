@@ -9,7 +9,10 @@ our %Stat;
 
 sub check {
     my $c=0;
-    while (my($key,$file) = each %INC) {
+
+    foreach my $entry (map { [ $_, $INC{$_} ] } keys %INC) {
+        my($key,$file) = @$entry;
+
         next if $file eq $INC{"Module/Reload.pm"};  #too confusing
         local $^W = 0;
         my $mtime = (stat $file)[9];
