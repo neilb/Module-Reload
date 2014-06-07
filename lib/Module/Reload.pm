@@ -80,11 +80,18 @@ patches for these problems, I would encourage that.
 
 Event
 
+=head1 REPOSITORY
+
+L<https://github.com/neilbowers/Module-Reload>
+
 =head1 AUTHOR
 
-Copyright © 1997-1998 Doug MacEachern & Joshua Pritikin.  All rights reserved.
+Doug MacEachern & Joshua Pritikin
 
-This package is free software and is provided "as is" without express
-or implied warranty.  It may be used, redistributed and/or modified
-under the terms of the Perl Artistic License (see
-http://www.perl.com/perl/misc/Artistic.html)
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 1997-1998 Doug MacEachern & Joshua Pritikin.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
