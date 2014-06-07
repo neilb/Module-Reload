@@ -1,7 +1,11 @@
-use strict;
 package Module::Reload;
-use vars qw($VERSION $Debug %Stat);
-$VERSION = "1.07";
+
+use 5.006;
+use strict;
+use warnings;
+
+our $Debug = 0;
+our %Stat;
 
 sub check {
     my $c=0;

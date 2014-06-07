@@ -2,6 +2,7 @@ Revision history for Perl module Module::Reload
 
 1.08 2014-06-08 NEILB
     - Added Changes file
+    - Switched to Dist::Zilla, moving Reload.pm into lib/Module/ in the process
 
 1.07 1998-08-20 JPRIT
 
