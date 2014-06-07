@@ -5,6 +5,7 @@ Revision history for Perl module Module::Reload
       is unsafe.
     - Added Changes file
     - Added standard doc sections for author, license, and repository
+    - Added some entries to SEE ALSO
     - Switched to Dist::Zilla, moving Reload.pm into lib/Module/ in the process
 
 1.07 1998-08-20 JPRIT

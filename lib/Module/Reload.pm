@@ -78,7 +78,13 @@ patches for these problems, I would encourage that.
 
 =head1 SEE ALSO
 
-Event
+L<Module::Reload::Selective> is like this module, but lets you
+control which modules will be reloaded.
+
+L<again> provides a slightly different mechanism for reloading
+changed modules, where you have to explicitly decide which modules to reload.
+
+L<Apache2::Reload> (or L<Apache::Reload> if you're still using Apache 1).
 
 =head1 REPOSITORY
 
