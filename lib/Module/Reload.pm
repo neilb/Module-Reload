@@ -88,7 +88,7 @@ L<Apache2::Reload> (or L<Apache::Reload> if you're still using Apache 1).
 
 =head1 REPOSITORY
 
-L<https://github.com/neilbowers/Module-Reload>
+L<https://github.com/neilb/Module-Reload>
 
 =head1 AUTHOR
 
