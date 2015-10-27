@@ -2,6 +2,7 @@ Revision history for Perl module Module::Reload
 
 1.09 2015-10-27 NEILB
     - Updated github repo URL after changing my github username
+    - Include a META.json in releases, and tag & push to github on release
 
 1.08 2014-06-08 NEILB
     - Got rid of each on %INC, since we might delete from %INC, so each
