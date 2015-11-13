@@ -90,6 +90,9 @@ changed modules, where you have to explicitly decide which modules to reload.
 
 L<Apache2::Reload> (or L<Apache::Reload> if you're still using Apache 1).
 
+L<perldoc require|http://perldoc.perl.org/functions/require.html>
+for details of how C<require> works.
+
 =head1 REPOSITORY
 
 L<https://github.com/neilb/Module-Reload>
