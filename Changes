@@ -1,5 +1,9 @@
 Revision history for Perl module Module::Reload
 
+1.10 2015-11-13 NEILB
+    - Supress warning if entries in %INC don't have a value.
+      Miko O'Sullivan pointed out how this can happen. Added test case for it.
+
 1.09 2015-10-27 NEILB
     - Updated github repo URL after changing my github username
     - Include a META.json in releases, and tag & push to github on release

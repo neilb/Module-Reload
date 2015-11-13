@@ -13,6 +13,10 @@ sub check {
     foreach my $entry (map { [ $_, $INC{$_} ] } keys %INC) {
         my($key,$file) = @$entry;
 
+        # If the require'ing of a file failed, but was caught by eval,
+        # then we end up with a value of undef in %INC. Skip those.
+        next unless defined($file);
+
         next if $file eq $INC{"Module/Reload.pm"};  #too confusing
         local $^W = 0;
         my $mtime = (stat $file)[9];
@@ -93,6 +97,8 @@ L<https://github.com/neilb/Module-Reload>
 =head1 AUTHOR
 
 Doug MacEachern & Joshua Pritikin
+
+Now maintained by Neil Bowers E<lt>neilb@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
