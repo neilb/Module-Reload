@@ -8,7 +8,15 @@ our $Debug = 0;
 our %Stat;
 
 sub check {
+    my ($package, $cb)=@_;
     my $c=0;
+
+    if (defined($cb)) {
+        if (ref($cb) ne 'CODE') {
+            warn "Module::Reload: callback not a CODE ref";
+            $cb = undef;
+        }
+    }
 
     foreach my $entry (map { [ $_, $INC{$_} ] } keys %INC) {
         my($key,$file) = @$entry;
@@ -44,6 +52,9 @@ sub check {
                          join(', ',@INC).")\n");
                 }
             }
+            if ($cb) {
+                $cb->($key);
+            }
             ++$c;
         }
         $Stat{$file} = $mtime;
@@ -62,6 +73,11 @@ Module::Reload - Reload %INC files when updated on disk
 =head1 SYNOPSIS
 
   Module::Reload->check;
+
+  # with notifications
+  Module::Reload->check(sub {
+    print "Reloaded: $_\n";
+  });
 
 =head1 DESCRIPTION
 

@@ -1,6 +1,6 @@
 # reload -*-perl-*-
 use Test;
-BEGIN { plan tests => 5 }
+BEGIN { plan tests => 8 }
 
 use Module::Reload;
 ok 1;
@@ -42,5 +42,18 @@ ok $test, 2;
 Module::Reload->check;
 
 ok $test, 3;
+
+sleep 1;  #modification times are in seconds...get a new one
+rewrite(4);
+
+my $called = 0;
+Module::Reload->check(sub {
+    my $name = shift;
+    ok $name, 'testin';
+	$called = 1;
+});
+
+ok $called, 1;
+ok $test, 4;
 
 unlink("testin");
