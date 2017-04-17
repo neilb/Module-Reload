@@ -1,5 +1,8 @@
 Revision history for Perl module Module::Reload
 
+1.11 2017-04-17 NEILB
+    - Fix the tests to pass when '.' is no longer in @INC (Perl 5.26.0)
+
 1.10 2015-11-13 NEILB
     - Supress warning if entries in %INC don't have a value.
       Miko O'Sullivan pointed out how this can happen. Added test case for it.

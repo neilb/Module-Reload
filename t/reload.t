@@ -2,6 +2,7 @@
 use Test;
 BEGIN { plan tests => 5 }
 
+use lib '.';
 use Module::Reload;
 ok 1;
 
