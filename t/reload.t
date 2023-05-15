@@ -1,6 +1,5 @@
 # reload -*-perl-*-
-use Test;
-BEGIN { plan tests => 5 }
+use Test::More tests => 5;
 
 use lib '.';
 use Module::Reload;
@@ -33,15 +32,15 @@ $test = 2;
  
 Module::Reload->check;
  
-ok $test, 2;
+is $test, 2;
  
 sleep 1;  #modification times are in seconds...get a new one
 rewrite(3);
  
-ok $test, 2;
+is $test, 2;
 
 Module::Reload->check;
 
-ok $test, 3;
+is $test, 3;
 
 unlink("testin");
